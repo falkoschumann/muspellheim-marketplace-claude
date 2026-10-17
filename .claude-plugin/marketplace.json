@@ -1,0 +1,14 @@
+{
+  "name": "muspellheim",
+  "description": "Plugins for my projects.",
+  "owner": {
+    "name": "Falko Schumann"
+  },
+  "plugins": [
+    {
+      "name": "muspellheim-shared",
+      "source": "./plugins/muspellheim-shared",
+      "description": "Shared hooks and skills for my projects."
+    }
+  ]
+}

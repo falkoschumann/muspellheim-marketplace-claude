@@ -7,7 +7,7 @@ Plugins for my projects.
 Add marketplace and install plugin:
 
 ```terminal
-claude plugin marketplace add https://github.com/falkoschumann/claude-plugins
+claude plugin marketplace add https://github.com/falkoschumann/muspellheim-marketplace-claude.git
 claude plugin install muspellheim-shared
 ```
 

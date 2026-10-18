@@ -1,4 +1,4 @@
-# Muspellheim's Claude Marketplace
+# Muspellheim Marketplace for Claude
 
 Plugins for my projects.
 

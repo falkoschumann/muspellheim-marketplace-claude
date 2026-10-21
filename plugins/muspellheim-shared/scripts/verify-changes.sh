@@ -23,6 +23,11 @@ if [ -z "$(git status --porcelain 2>/dev/null)" ]; then
   exit 0
 fi
 
+# No Makefile - nothing to run the checks with.
+if [ ! -f Makefile ]; then
+  exit 0
+fi
+
 if output=$(make check 2>&1); then
   exit 0
 fi

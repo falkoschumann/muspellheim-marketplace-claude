@@ -1,7 +1,7 @@
 {
   "name": "muspellheim-shared",
   "displayName": "Muspellheim Shared",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared hooks and skills for my projects.",
   "author": {
     "name": "Falko Schumann"

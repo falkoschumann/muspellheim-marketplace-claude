@@ -14,4 +14,4 @@ fix:
 	prettier --write .
 
 deploy:
-	claude plugin tag plugins/muspellheim-shared $(CLAUDE_OPTS)
+	claude plugin tag plugins/muspellheim-shared --push $(CLAUDE_OPTS)

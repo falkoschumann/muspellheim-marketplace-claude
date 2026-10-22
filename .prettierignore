@@ -3,6 +3,3 @@
 
 # Corrupt files for testing purposes
 corrupt.*
-
-# Claude evaluation results
-plugins/*/evals/results/

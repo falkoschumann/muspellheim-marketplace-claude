@@ -18,10 +18,11 @@ claude plugin disable muspellheim-shared --scope user
 claude plugin enable muspellheim-shared --scope project
 ```
 
-Update marketplace:
+Update plugin:
 
 ```terminal
 claude plugin marketplace update muspellheim
+claude plugin update muspellheim-share@dmuspellheim
 ```
 
 > [!IMPORTANT]

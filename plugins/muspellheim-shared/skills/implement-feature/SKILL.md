@@ -14,102 +14,76 @@ the functional core, imperative shell pattern.
 1. Ask which specification shall be implemented.
 2. Read the specification from a file `<name>.esdm.yaml`.
 3. Locate the appropriate test cases from a file `<name>.feature.esdm.yaml`.
-4. Write the tests in `src/`.
-5. Run the tests and ensure they fail (show red).
-6. Write the code in `src/`.
-7. Iterate until all tests pass (show green).
+4. Determine the programming language of the project and read the matching
+   reference `references/<language>.md`. If there is none, use the idiomatic
+   equivalents of the concepts below.
+5. Write the tests where the project conventions place them.
+6. Run the tests and ensure they fail (show red).
+7. Write the code where the project conventions place it.
+8. Iterate until all tests pass (show green).
 
 ## Domain Code
 
-The domain code must be pure functional without I/O.
+The domain code must be pure functional without I/O. All data is immutable.
 
 Commands and Events have a `type` and a `data` property. Queries have a `type`
 and a `parameters` property. The `type` is the name and `data`/`parameters` is
-the payload, from their ESDM definition.
+the payload, from their ESDM definition. The `type` discriminates the variants
+of a message union.
 
 ### Types
 
-Map each ESDM schema to a `type` wrapped in `Readonly<>`:
+Map each ESDM schema to an immutable type:
 
-- `object` → `Readonly<{ … }>`, `array` → `readonly T[]`
-- `oneOf` → union, mark the properties of the other alternatives as `?: never`
-- `allOf` → intersection
-- `enum` or `const` → union of literal types
+- `object` → immutable record
+- `array` → immutable list
+- `oneOf` → sum type (tagged union) of the alternatives
+- `allOf` → composition of the parts
+- `enum` or `const` → closed set of literal values
 - `$ref` → the referenced type
 
-```typescript
-type DoSomethingCommand = Readonly<{
-  type: "do-something";
-  data: DoSomethingCommandData;
-}>;
-
-type SomethingHappenedEvent = Readonly<{
-  type: "something-happened";
-  data: SomethingHappenedEventData;
-}>;
-
-type GetSomethingQuery = Readonly<{
-  type: "get-something";
-  parameters: GetSomethingQueryParameters;
-}>;
-
-type GetSomethingQueryResult = Readonly<{
-  something: Something;
-}>;
+```
+type DoSomethingCommand = { type: "do-something", data: DoSomethingCommandData }
+type SomethingHappenedEvent = { type: "something-happened", data: SomethingHappenedEventData }
+type GetSomethingQuery = { type: "get-something", parameters: GetSomethingQueryParameters }
+type GetSomethingQueryResult = { something: Something }
 ```
 
 ### Aggregate and DCB
 
 - `decide(state, command) → Result<Event[], Error>` – verifies the invariants
   (business rules) and decides which events to publish or reject.
-- `evolve(state, event) → state` – applies an event to the state (reducer).
+- `evolve(state, event) → State` – applies an event to the state (reducer).
 
-```typescript
-type Result<T, E> =
-  Readonly<{ ok: true; value: T }> | Readonly<{ ok: false; error: E }>;
+`Result` is either a success with a value or a failure with an error.
 
-function ok<T>(value: T): Result<T, never> {
-  return { ok: true, value };
-}
+```
+decide(state, command) → Result<Event[], Error>
+  match command.type
+    case ... → ok([events]) or fail(error)
 
-function fail<E>(error: E): Result<never, E> {
-  return { ok: false, error };
-}
+evolve(state, event) → State
+  match event.type
+    case ... → new state
 
-function decide(state: State, command: Command): Result<Event[], Error> {
-  switch (command.type) {
-    // ...
-  }
-}
-
-function evolve(state: State, event: Event): State {
-  switch (event.type) {
-    // ...
-  }
-}
-
-function evolveAll(state: State, events: Event[]): State {
-  return events.reduce(evolve, state);
-}
+evolveAll(state, events) → State
+  fold events with evolve starting at state
 ```
 
 ### Read Model and Query
 
-```typescript
-function project(readModel: ReadModel, event: Event): ReadModel {
-  switch (event.type) {
-    // ...
-  }
-}
+- `project(readModel, event) → ReadModel` – applies an event to the read model
+  (reducer).
+- `<query>(readModel, query) → QueryResult` – answers a query from the read
+  model.
 
-function projectAll(readModel: ReadModel, events: Event[]): ReadModel {
-  return events.reduce(project, readModel);
-}
+```
+project(readModel, event) → ReadModel
+  match event.type
+    case ... → new read model
 
-function getSomething(
-  readModel: ReadModel,
-  query: GetSomethingQuery,
-): GetSomethingQueryResult {
-  // ...
-}
+projectAll(readModel, events) → ReadModel
+  fold events with project starting at readModel
+
+getSomething(readModel, query: GetSomethingQuery) → GetSomethingQueryResult
 ```

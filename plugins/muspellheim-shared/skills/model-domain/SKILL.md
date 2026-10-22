@@ -20,8 +20,8 @@ boundaries sit, and how the things involved are identified. Ask one question at
 a time and phrase the questions in the vocabulary from the schemas.
 
 When you have enough context, propose the model following the conventions from
-the schemas. After the files are written, ask me to run `esdm lint` and we will
-work through any findings together.
+the schemas. After the files are written, run `esdm lint` and we will work
+through any findings together.
 
 ## Conventions
 
@@ -35,8 +35,8 @@ Follow these conventions in addition to the schemas:
   with optional Fugenlaut.
 - **Queries** are named in the imperative form with the fix prefix "get-" in
   English and in the infinitive form with the fix suffix "-ermitteln" in German.
-- Do not repeat the schema of an aggregate, entity, or value object, instead
-  reference it using the `$ref` with
+- Do not repeat the schema of an aggregate, entity, value object or read model,
+  instead reference it using the `$ref` with
   [reference notation](https://www.esdm.io/reference/reference-notation/) for
   example:
   - `esdm:domain=<domain-name>/bounded-context=<bounded-context-name>/aggregate=<aggregate-name>`
@@ -53,7 +53,8 @@ Follow these conventions in addition to the schemas:
   unused, other commands need no rule that the entity exists. An identity that
   comes from outside, like a natural key, can be duplicated or unknown, so its
   uniqueness and existence are invariants that scenarios verify with a
-  rejection. Delete commands are idempotent, deleting a missing entity succeeds.
+  rejection. Delete commands are idempotent as default, deleting a missing
+  entity succeeds.
 - Place each rule by the data it needs:
   - A rule that needs only the data of one value or one instance is an invariant
     of the value object or entity. Unit tests verify it.

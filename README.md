@@ -22,7 +22,7 @@ Update plugin:
 
 ```terminal
 claude plugin marketplace update muspellheim
-claude plugin update muspellheim-shared@dmuspellheim
+claude plugin update muspellheim-shared@muspellheim
 ```
 
 > [!IMPORTANT]

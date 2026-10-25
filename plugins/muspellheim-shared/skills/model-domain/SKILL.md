@@ -81,5 +81,6 @@ Follow these conventions in addition to the schemas:
   - A rule about what a command emits stays a constraint of the command.
 - Create a separate file for each aggregate, DCB, and read model with their
   corresponding commands, events, and queries.
+- Create separate files for entities and value objects.
 - Create a feature file for each aggregate, DCB, process manager, and read model
   besides their respective files.

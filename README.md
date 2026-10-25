@@ -28,20 +28,28 @@ claude plugin update muspellheim-shared@muspellheim
 > [!IMPORTANT]
 >
 > Currently, the rules cannot be packaged into a plugin. Therefore, you have to
-> manually copy the `rules` folder into your `.claude` folder.
+> manually copy the `rules` folder into your `.claude` folder or add them to
+> your `AGENTS.md`.
 
 ## Usage
 
-- **Muspellheim Shared:** Shared hooks and skills for my projects:
-  - Verify results after a task
-  - Model a domain
-  - Implement a feature
-  - Review the usability and user experience
-- **Rules**
-  - Functional core, imperative shell archiecture
-  - Manage a backlog
-  - Create conventional commits
-  - Model Domain with [ESDM](https://www.esdm.io)
-  - Code style for TypeScript
-  - Test style for TypeScript
-  - UI/UX Guidelines
+### Muspellheim Shared
+
+This plugin provides shared hooks and skills for my projects:
+
+- Verify results when a task is finished by running `make check`
+- Model a domain with ESDM
+- Implement a feature from the domain model
+- Review the usability and user experience
+
+### Rules
+
+The folder `rules` contains shared rules for my projects:
+
+- Functional core, imperative shell architecture
+- Manage a backlog
+- Create conventional commits
+- Model Domain with [ESDM](https://www.esdm.io)
+- Code style for TypeScript
+- Test style for TypeScript
+- UI/UX Guidelines

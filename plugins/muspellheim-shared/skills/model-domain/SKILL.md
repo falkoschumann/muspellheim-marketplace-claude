@@ -23,6 +23,23 @@ When you have enough context, propose the model following the conventions from
 the schemas. After the files are written, run `esdm lint` and we will work
 through any findings together.
 
+## Scope
+
+Model only the business logic: the language, rules and behavior of the domain.
+Decisions about the user interface and non-functional requirements do not belong
+in the domain model:
+
+- **User interface**: screens, forms, controls, layout, navigation, labels,
+  message texts, input and display formats.
+- **Non-functional requirements**: performance, scalability, availability,
+  security mechanisms like authentication or encryption, persistence,
+  technology, and deployment.
+
+Do not ask about these in the interview. When a feature or backlog item contains
+such details, model only the business rule behind them. For example "the save
+button is disabled while the title is empty" becomes the invariant "a title is
+required". Tell me which details you left out, so I can capture them elsewhere.
+
 ## Conventions
 
 Follow these conventions in addition to the schemas:

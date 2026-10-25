@@ -36,6 +36,10 @@ type GetSomethingQueryResult = Readonly<{
 }>;
 ```
 
+ESDM names are in kebab-case. Identifiers in code use camelCase and PascalCase,
+like `DoSomethingCommand`. The `type` of a message keeps the ESDM name, like
+`"do-something"`.
+
 ### Result and Rejection
 
 ```typescript

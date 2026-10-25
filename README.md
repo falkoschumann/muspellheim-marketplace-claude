@@ -51,5 +51,5 @@ The folder `rules` contains shared rules for my projects:
 - Create conventional commits
 - Model Domain with [ESDM](https://www.esdm.io)
 - Code style for TypeScript
-- Test style for TypeScript
+- Test style
 - UI/UX Guidelines

@@ -39,7 +39,7 @@ This plugin provides shared hooks and skills for my projects:
 
 - Verify results when a task is finished by running `make check`
 - Model a domain with ESDM
-- Implement a feature from the domain model
+- Implement the application slice by slice
 - Review the usability and user experience
 
 ### Rules

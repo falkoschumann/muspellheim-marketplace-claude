@@ -19,7 +19,7 @@ Map each ESDM schema to an immutable type:
 - `enum` or `const` → closed set of literal values
 - `$ref` → the referenced type
 
-```
+```plaintext
 type DoSomethingCommand = { type: "do-something", data: DoSomethingCommandData }
 type SomethingHappenedEvent = { type: "something-happened", data: SomethingHappenedEventData }
 type GetSomethingQuery = { type: "get-something", parameters: GetSomethingQueryParameters }
@@ -32,7 +32,7 @@ type GetSomethingQueryResult = { something: Something }
 `Rejection` names the violated invariant from the model. The user interface
 turns it into a message for the user.
 
-```
+```plaintext
 Result<T, E> = ok(value: T) | fail(error: E)
 Rejection = { invariant: InvariantName }
 ```
@@ -42,7 +42,7 @@ Rejection = { invariant: InvariantName }
 An invariant of a value object or entity needs only the data of the value
 itself. A constructor function verifies it.
 
-```
+```plaintext
 createSomething(data) → Result<Something, Rejection>
 ```
 
@@ -55,7 +55,7 @@ createSomething(data) → Result<Something, Rejection>
 - `consults(command) → EventQuery` – DCB only: the event types and tags the
   decision needs.
 
-```
+```plaintext
 decide(state, command) → Result<Event[], Rejection>
   match command.type
     case ... → ok([events]) or fail({ invariant })
@@ -75,7 +75,7 @@ evolveAll(state, events) → State
 - `<query>(readModel, query) → QueryResult` – answers a query from the read
   model.
 
-```
+```plaintext
 project(readModel, event) → ReadModel
   match event.type
     case ... → new read model
@@ -96,7 +96,7 @@ A trigger is an incoming event or a fired timer.
   timers to set or cancel, based on the state before the trigger.
 - `isEnded(state) → boolean` – whether the instance is retired.
 
-```
+```plaintext
 Reaction = { commands: Command[], setTimers: TimerName[], cancelTimers: TimerName[] }
 ```
 

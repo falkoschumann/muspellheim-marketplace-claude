@@ -8,11 +8,24 @@ GitHub Flavored Markdown task list.
 - [ ] Open task
 - [x] Completed task
 
-## Behavior
+## Changes
 
-- Append new entries to the bottom of the list.
 - List order is priority: higher up means more important.
 - Mark completed entries as `[x]` and leave them in place.
-- Do not delete, reword, or reorder entries unless asked.
-- If a task is unclear, ask for clarification instead of recording an
-  assumption.
+- Propose new, reworded, reordered or deleted entries when they are necessary or
+  useful, with a short reason. Apply them only after my confirmation.
+
+## Working on a Task
+
+Before working on a task, present a short summary of the planned solution and
+wait for my confirmation:
+
+- Goal and acceptance criteria
+- Affected parts, like domain model, code and user interface
+- Approach in a few sentences
+- Open questions and assumptions
+
+A task is unclear when you cannot state verifiable acceptance criteria, when it
+allows several interpretations that lead to different solutions, when it uses
+terms found neither in the domain model nor in the code, or when its scope is
+open. List these points as open questions instead of deciding them yourself.

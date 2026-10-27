@@ -47,31 +47,34 @@ Follow these conventions in addition to the schemas:
 - **Commands** are named in the imperative form "create something" in English
   and in the infinitive form "etwas erstellen" in German.
 - **Events** are named in the past tense "something created" in English and
-  "etwas erstellt" in German. Omit the prefix when it is clear from the context.
+  "etwas erstellt" in German.
+- In an aggregate, omit the aggregate name from commands and events, like
+  "create" and "created" in the aggregate "order". A DCB has no such context, so
+  keep the subject, like "create order" and "order created".
 - **Read Models** have the suffix "-view" in English and "ansicht" in German
   with optional Fugenlaut.
-- **Queries** are named in the imperative form with the fix prefix "get-" in
-  English and in the infinitive form with the fix suffix "-ermitteln" in German.
-- Do not repeat the schema of an aggregate, entity, value object or read model,
-  instead reference it using the `$ref` with
-  [reference notation](https://www.esdm.io/reference/reference-notation/) for
-  example:
-  - `esdm:domain=<domain-name>/bounded-context=<bounded-context-name>/aggregate=<aggregate-name>`
-  - `esdm:domain=<domain-name>/bounded-context=<bounded-context-name>/entity=<entity-name>`
-  - `esdm:domain=<domain-name>/bounded-context=<bounded-context-name>/value-object=<value-object-name>`
-  - `esdm:domain=<domain-name>/bounded-context=<bounded-context-name>/read-model=<read-model-name>`,
-    when a query passes the read model through
+- **Queries** are named in the imperative form with the fixed prefix "get-" in
+  English and in the infinitive form with the fixed suffix "-ermitteln" in
+  German.
+- **Event handlers, policies and process managers** are named after the acting
+  instance as a noun with the suffix "-er" or "-or", like `invoice-sender` or
+  `payment-reminder`. They may react to several events and emit several
+  commands, so a rule form like "notify customer on shipment" does not fit.
+- Do not repeat a schema, reference it with `$ref` in the
+  [reference notation](https://www.esdm.io/reference/reference-notation/)
+  `esdm:domain=<domain>/bounded-context=<context>/<kind>=<name>`. It refers to
+  the `schema` of an entity, value object or read model and the `state` of an
+  aggregate. Do not reference commands, events or queries; extract a shared part
+  of their payloads as a value object.
 - Apply `additionalProperties: false` as default for JSON Schemas. Use
   `unevaluatedProperties: false` instead when the properties are declared in
   subschemas like `oneOf` or `allOf`, so they need not be repeated.
 - Use `data: {}` as an empty payload.
-- Do not add constraints that follow from identity, when the system assigns the
-  identity itself, like a UUID: a create command needs no rule that the ID is
-  unused, other commands need no rule that the entity exists. An identity that
-  comes from outside, like a natural key, can be duplicated or unknown, so its
-  uniqueness and existence are invariants that scenarios verify with a
-  rejection. Delete commands are idempotent as default, deleting a missing
-  entity succeeds.
+- Add no rule that an ID is unused or exists when the system assigns it, like a
+  UUID. An identity from outside, like a natural key, can be duplicated or
+  unknown, so its uniqueness and existence are invariants that scenarios verify
+  with a rejection.
+- Delete commands are idempotent, deleting a missing entity succeeds.
 - Place each rule by the data it needs:
   - A rule that needs only the data of one value or one instance is an invariant
     of the value object or entity. Unit tests verify it.
@@ -79,8 +82,7 @@ Follow these conventions in addition to the schemas:
     several parts of the aggregate or DCB together, is an invariant of the
     aggregate or DCB. Scenarios verify it with a rejection.
   - A rule about what a command emits stays a constraint of the command.
-- Create a separate file for each aggregate, DCB, and read model with their
-  corresponding commands, events, and queries.
-- Create separate files for entities and value objects.
-- Create a feature file for each aggregate, DCB, process manager, and read model
-  besides their respective files.
+- Create a separate file for each aggregate, DCB, read model and process manager
+  with their commands, events and queries, and for each entity and value object.
+- Create a feature file for each aggregate, DCB, read model and process manager
+  besides its file.

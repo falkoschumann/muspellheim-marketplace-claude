@@ -1,5 +1,6 @@
 # Muspellheim Marketplace for Claude
 
+[![Build](https://github.com/falkoschumann/muspellheim-marketplace-claude/actions/workflows/build.yml/badge.svg)](https://github.com/falkoschumann/muspellheim-marketplace-claude/actions/workflows/build.yml)
 [![Tag](https://img.shields.io/github/v/tag/falkoschumann/muspellheim-marketplace-claude?sort=semver)](https://github.com/falkoschumann/muspellheim-marketplace-claude/tags)
 
 Plugins for my projects.

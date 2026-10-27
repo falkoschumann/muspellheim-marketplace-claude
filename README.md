@@ -1,5 +1,7 @@
 # Muspellheim Marketplace for Claude
 
+[![Tag](https://img.shields.io/github/v/tag/falkoschumann/muspellheim-marketplace-claude?sort=semver)](https://github.com/falkoschumann/muspellheim-marketplace-claude/tags)
+
 Plugins for my projects.
 
 ## Install

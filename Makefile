@@ -14,4 +14,5 @@ fix:
 	prettier --write .
 
 deploy:
+	git push
 	claude plugin tag plugins/muspellheim-shared --push $(CLAUDE_OPTS)

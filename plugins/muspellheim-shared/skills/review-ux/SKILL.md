@@ -12,37 +12,50 @@ Goal: Find usability problems in UI code before users run into them, and propose
 concrete, actionable improvements. The yardstick is the dialogue principles of
 ISO 9241-110 and the context of use of the application, not personal taste.
 
+Only report findings. Do not change code unless the user asks for it.
+
 ## Procedure
 
 1. **Clarify the context of use:** Who uses the feature, what task are they
-   trying to accomplish, and in what environment? If unknown, ask briefly before
-   evaluating.
-2. **Read the affected components/screens.**
+   trying to accomplish, and in what environment? Derive it from the backlog,
+   the domain model, and the README. Ask briefly only when it cannot be derived;
+   otherwise state your assumptions.
+2. **Inspect the UI:** Read the affected components. When possible, also look at
+   the running application, because layout, contrast, and focus are hard to
+   judge from code alone.
 3. **Check each principle:**
    - Suitability for the task: Does the UI support the task without unnecessary
      steps?
    - Self-descriptiveness: Is it clear at all times where the user is and what
      is possible?
-   - Conformity with user expectations: Consistent with conventions and with the
-     rest of the app?
+   - Conformity with user expectations: Consistent with conventions, with the
+     rest of the app, and with the users' domain terms?
    - Learnability: Is learning supported (hints, examples, sensible defaults)?
    - Controllability: Can the user control pace, order, and cancellation?
    - Use error robustness: Are errors prevented, detected, and easy to correct?
-   - User engagement: Is the interaction appealing and motivating?
-4. **First-time user walkthrough (optional, for new or rarely used flows):**
-   Walk through the flow once more from the perspective of a first-time user
-   without prior knowledge. Where do they get stuck, which terms do they not
+   - User engagement: Does the UI appear trustworthy and treat users with
+     respect (tone of texts, no dark patterns)?
+   - Accessibility (beyond ISO 9241-110): Is everything operable by keyboard,
+     with visible focus and accessible names?
+
+   For new or rarely used flows, also walk through them as a first-time user
+   without prior knowledge: Where do they get stuck, which terms do they not
    understand, which next step is unclear?
-5. **Record the findings.**
+
+4. **Record the findings.**
 
 ## Output format
 
 For each finding:
 
 - Location (file/line or screen)
-- Affected principle
+- Affected principle (only the primary one, to avoid duplicates)
 - Problem
-- Severity: critical / serious / minor
+- Severity:
+  - critical: the task cannot be completed, or data is lost
+  - serious: the task is considerably harder or error-prone, but a workaround
+    exists
+  - minor: irritating, but costs little time
 - Concrete suggestion for improvement
 
 Sorted by severity. At the end: what is already done well.

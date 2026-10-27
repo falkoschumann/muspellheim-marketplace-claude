@@ -13,6 +13,6 @@ check:
 fix:
 	prettier --write .
 
-deploy:
+release: all
 	git push
 	claude plugin tag plugins/muspellheim-shared --push $(CLAUDE_OPTS)

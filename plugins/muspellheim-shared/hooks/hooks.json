@@ -5,9 +5,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/verify-changes.sh",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/make-check.sh",
             "args": [],
-            "statusMessage": "Verifying changes…"
+            "timeout": 300,
+            "statusMessage": "Hook make-check.sh: Verifying changes…"
           }
         ]
       }
